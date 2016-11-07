@@ -2,6 +2,7 @@ var express = require( 'express' );
 var app = express();
 var chalk = require("chalk");
 var morgan = require("morgan");
+var nunjucks = require("nunjucks");
 
 app.use(morgan("tiny"));
 
