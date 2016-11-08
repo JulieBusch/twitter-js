@@ -5,14 +5,19 @@ const router = express.Router();
 const tweetBank = require('../tweetBank');
 
 router.get('/', function (req, res) {
-  let tweets = tweetBank.list();
-  res.render( 'index', { tweets: tweets } );
+  const someTweets = tweetBank.list();
+  res.render( 'index', { tweets: someTweets } );
 });
 
 // router.get("/stylesheets/style.css", function(req, res, next) {
 //   res.sendFile("../public/stylesheets/style.css");
 // });
 
+router.get('/users/:name', function(req, res) {
+	const name = req.params.name;
+	const tweetsFromUser = tweetBank.find({name: name});
+	res.render('index', {tweets: tweetsFromUser});
+});
 
 
 

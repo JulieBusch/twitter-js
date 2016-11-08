@@ -41,6 +41,10 @@ code {
   font-size: 80%;
 }
 
+.inline-img {
+  display: inline;
+}
+
 .tweetbox {
   padding: 7px;
 }
@@ -56,4 +60,6 @@ code {
 }
 .content .by {
   font-weight: bold;
+  margin-top: -5px;
+  margin-bottom: -5px;
 }
