@@ -1,41 +1,35 @@
+"use strict";
 var express = require( 'express' );
 var app = express();
 var chalk = require("chalk");
 var morgan = require("morgan");
 var nunjucks = require("nunjucks");
+const routes = require('./routes/');
+
+app.use('/', routes);
 
 app.use(morgan("tiny"));
 
 app.engine('html', nunjucks.render);
+//You have an html view engine, it is nunjucks
 app.set('view engine', 'html')
+//When you get an html file, use your view engine
 nunjucks.configure('views', {noCache: true});
-// app.use(function (req, res, next) {
-//     console.log(chalk.green(req.method, " ", req.url));
-//     next();
-//     // call `next`, or else your app will be a black hole — receiving requests but never properly responding
-// })
-
-app.use("/special/", function (req, res, next) {
-    console.log(chalk.magenta("You found something special!"));
-    next();
-})
-
-app.get("/", function(req, res, next) {
-  res.send("Welcome!");
-});
-
-app.get("/news", function(req, res, next) {
-  res.send("Look at all this news!")
-});
+//When you look for a template, look in the views folder,
+//and don't cache
 
 app.listen(3000, function() {
   console.log("server listening");
 });
 
-// var env = nunjucks.configure('views', {
-// 	express: app,
-// 	noCache: true
+
+
+
+// app.get("/index", function(req, res, next) {
+// 	res.render('index', people);
+//   //render is an express method but nunjucks is our rendering engine
 // });
+<<<<<<< HEAD
 
 app.get("/index.html", function(req, res, next) {
 	res.render('index', {title: 'An Example', people: [{
@@ -47,6 +41,8 @@ app.get("/index.html", function(req, res, next) {
 	res.send(html);
 });
 })
+=======
+>>>>>>> 069fd94f100cedd98562b060dcf9a0d2431e8bcf
 
 
 
