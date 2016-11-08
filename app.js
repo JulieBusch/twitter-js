@@ -1,11 +1,11 @@
 "use strict";
-var express = require( 'express' );
-var app = express();
-var chalk = require("chalk");
-var morgan = require("morgan");
-var nunjucks = require("nunjucks");
+const express = require( 'express' );
+const chalk = require("chalk");
+const morgan = require("morgan");
+const nunjucks = require("nunjucks");
 const routes = require('./routes/');
 
+const app = express();
 app.use('/', routes);
 
 app.use(morgan("tiny"));
@@ -29,7 +29,6 @@ app.listen(3000, function() {
 // 	res.render('index', people);
 //   //render is an express method but nunjucks is our rendering engine
 // });
-<<<<<<< HEAD
 
 app.get("/index.html", function(req, res, next) {
 	res.render('index', {title: 'An Example', people: [{
@@ -39,10 +38,30 @@ app.get("/index.html", function(req, res, next) {
 		console.log(err);
 	}
 	res.send(html);
+	});
 });
-})
-=======
->>>>>>> 069fd94f100cedd98562b060dcf9a0d2431e8bcf
 
+app.use(express.static('public'));
+//above code replaces res.sendFile handler below 
+
+// app.get("/stylesheets/style.css", function(req, res, next) {
+// 	var options = {
+// 		root: __dirname, 
+// 		dotfiles: 'deny', 
+// 		headers: {
+// 			'x-timestamp': Date.now(),
+// 			'x-sent': true
+// 		}
+// 	};
+// 	// var fileName = req.params.name;
+// 	res.sendFile('/public/stylesheets/style.css', options, function(err) {
+// 		if (err) {
+// 			console.log(err);
+// 			res.status(err.status).end();
+// 		} else {
+// 			console.log('Sent: ', fileName);
+// 		}
+// 	});
+// });
 
 

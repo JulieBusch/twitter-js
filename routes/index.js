@@ -9,9 +9,9 @@ router.get('/', function (req, res) {
   res.render( 'index', { tweets: tweets } );
 });
 
-router.get("/stylesheets/style.css", function(req, res, next) {
-  res.sendFile("../public/stylesheets/style.css");
-});
+// router.get("/stylesheets/style.css", function(req, res, next) {
+//   res.sendFile("../public/stylesheets/style.css");
+// });
 
 
 
