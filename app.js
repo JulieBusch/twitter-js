@@ -1,14 +1,12 @@
-"use strict";
+'use strict';
 const express = require( 'express' );
-const chalk = require("chalk");
-const morgan = require("morgan");
-const nunjucks = require("nunjucks");
+const chalk = require('chalk');
+const morgan = require('morgan');
+const nunjucks = require('nunjucks');
 const routes = require('./routes/');
+const bodyParser = require('body-parser');
 
 const app = express();
-app.use('/', routes);
-
-app.use(morgan("tiny"));
 
 app.engine('html', nunjucks.render);
 //You have an html view engine, it is nunjucks
@@ -18,19 +16,15 @@ nunjucks.configure('views', {noCache: true});
 //When you look for a template, look in the views folder,
 //and don't cache
 
-app.listen(3000, function() {
-  console.log("server listening");
-});
+app.use(morgan('tiny'));
 
+app.use(express.static('public'));
 
+app.use(bodyParser.urlencoded()); 
 
+app.use('/', routes);
 
-// app.get("/index", function(req, res, next) {
-// 	res.render('index', people);
-//   //render is an express method but nunjucks is our rendering engine
-// });
-
-app.get("/index.html", function(req, res, next) {
+app.get('/index.html', function(req, res, next) {
 	res.render('index', {title: 'An Example', people: [{
 	name: 'Gandalf'}, {name: 'Hermione'}, {name: 'Frodo'}]
 }, function(err, html) {
@@ -41,10 +35,9 @@ app.get("/index.html", function(req, res, next) {
 	});
 });
 
-app.use(express.static('public'));
-//above code replaces res.sendFile handler below 
+//static routing replaces res.sendFile handler below 
 
-// app.get("/stylesheets/style.css", function(req, res, next) {
+// app.get('/stylesheets/style.css', function(req, res, next) {
 // 	var options = {
 // 		root: __dirname, 
 // 		dotfiles: 'deny', 
@@ -65,3 +58,6 @@ app.use(express.static('public'));
 // });
 
 
+app.listen(3000, function() {
+  console.log('server listening');
+});
