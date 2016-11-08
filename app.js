@@ -36,14 +36,15 @@ app.listen(3000, function() {
 // 	express: app,
 // 	noCache: true
 // });
+
 app.get("/index.html", function(req, res, next) {
 	res.render('index', {title: 'An Example', people: [{
 	name: 'Gandalf'}, {name: 'Hermione'}, {name: 'Frodo'}]
-}, function(err, output) {
+}, function(err, html) {
 	if (err) {
 		console.log(err);
 	}
-	console.log(output);
+	res.send(html);
 });
 })
 
